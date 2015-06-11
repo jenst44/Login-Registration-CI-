@@ -1,3 +1,9 @@
+<?php
+	if(empty($this->session->userdata['user_info']))
+	{
+		redirect('/');
+	}
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +11,6 @@
 	<title>HomePage</title>
 </head>
 <body>
-	<h1>Welcome <?=$success['first_name']?> <?=$success['last_name']?> - <?=$success['email']?></h1>
+	<h1>Welcome <?=$this->session->userdata['user_info']['first_name']?></h1>
 </body>
 </html>

@@ -6,7 +6,7 @@ class Users extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->output->enable_profiler(true);
+		// $this->output->enable_profiler(true);
 	}
 
 	public function index()
@@ -24,7 +24,9 @@ class Users extends CI_Controller {
 		else
 		{
 			$this->user->create($this->input->post());
-			$this->session->set_flashdata('success', 'User was created successfully');
+			$user = $this->user->find_user($this->input->post());
+			$this->session->set_userdata('user_info', $user);
+			redirect('/home');
 		}
 		redirect('/');
 	}
@@ -39,7 +41,7 @@ class Users extends CI_Controller {
 		$user = $this->user->find_user($this->input->post());
 		if($user)
 		{
-			$this->session->set_userdata('success', $user);
+			$this->session->set_userdata('user_info', $user);
 			redirect('/home');
 		}
 		redirect('/');
